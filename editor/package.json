@@ -1,0 +1,17 @@
+{
+  "name": "benzene",
+  "version": "1.0.0",
+  "description": "Utility for designing system dynamics models",
+  "main": "index.js",
+  "scripts": {
+    "run": "electron ."
+  },
+  "author": "mkualquiera",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^13.1.6"
+  },
+  "dependencies": {
+    "litegraph.js": "^0.7.9"
+  }
+}

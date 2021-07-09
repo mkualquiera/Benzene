@@ -1,0 +1,32 @@
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #000;
+    color: #EEE;
+    font: 12px Ubuntu;
+}
+
+.ontop {
+    position: absolute;
+    z-index: 20;
+}
+
+.menubutton {
+    font: 20px Ubuntu;
+    color: #EEE;
+    background-color: #232323;
+    padding: 12px;
+    transition: 0.1s;
+    border: none;
+    opacity: 0.1;
+}
+
+.menubutton:hover {
+    opacity: 1;
+    background-color: #333333;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
