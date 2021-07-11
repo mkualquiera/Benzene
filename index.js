@@ -56,6 +56,7 @@ ipcMain.on('save', (event, data) => {
         event.sender.send('requestSaveAs');
     } else {
         fs.writeFileSync(workingPath,data,'utf-8');
+        event.sender.send('saveSuccess');
     }
 })
 
@@ -76,4 +77,16 @@ ipcMain.on('loadFile', (event) => {
             event.sender.send('requestLoad', contents);
         }
     })  
+})
+
+ipcMain.on('clear', (event) => {
+    workingPath = "Untitled.json";
+})
+
+ipcMain.on('notSaved', (event) => {
+    win.setTitle("Benzene: " + workingPath + " (Unsaved changes*)");
+})
+
+ipcMain.on('yesSaved', (event) => {
+    win.setTitle("Benzene: " + workingPath);
 })

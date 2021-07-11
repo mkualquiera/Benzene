@@ -21,6 +21,10 @@ html, body {
     opacity: 0.1;
 }
 
+.confirmbutton {
+    background-color: #902323 !important;
+}
+
 .menubutton:hover {
     opacity: 1;
     background-color: #333333;

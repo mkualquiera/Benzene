@@ -19,10 +19,12 @@
         <button class="menubutton" onclick="saveAs()">Save as</button>
         <button class="menubutton" onclick="save()">Save</button>
         <button class="menubutton" onclick="load()">Load</button>
+        <button class="menubutton" id="newfileb" onclick="newfile()">New</button>
     </div>
     <script>
 
         var savingPath = null;
+        var saveVersion = -2;
 
         const { ipcRenderer } = require('electron');
 
@@ -38,6 +40,19 @@
             graph.configure(JSON.parse(data))
         });
 
+        ipcRenderer.on('saveSuccess', (event) => {
+            saveVersion = graph._version;
+        })
+
+        setInterval(()=> {
+            if (saveVersion != graph._version) {
+                console.log(saveVersion, graph._version);
+                ipcRenderer.send('notSaved');
+            } else {
+                ipcRenderer.send('yesSaved');
+            } 
+        },500);
+
         saveAs = function () {
             ipcRenderer.send('saveAs');
         }
@@ -49,6 +64,24 @@
 
         load = function () {
             ipcRenderer.send('loadFile');
+        }
+
+        var newfilebutton = document.getElementById("newfileb");
+        newfilebutton.addEventListener("mouseleave", (e) => {
+            if (newfilebutton.classList.contains("confirmbutton")) {
+                newfilebutton.classList.remove("confirmbutton");
+            }
+        }) 
+
+        newfile = function() {
+            if (newfilebutton.classList.contains("confirmbutton")) {
+                newfilebutton.classList.remove("confirmbutton");
+                saveVersion = -2;
+                graph.clear()
+                ipcRenderer.send('clear');
+            } else {
+                newfilebutton.classList.add("confirmbutton");
+            }
         }
 
         // define a handler
